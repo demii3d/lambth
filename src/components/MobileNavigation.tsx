@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { NavLink } from 'react-router-dom'
 import { ChevronDown, X } from 'lucide-react'
 import { mainNav } from '../config/navigation'
@@ -17,7 +18,7 @@ export default function MobileNavigation({ open, onClose }: { open: boolean; onC
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     const el = ref.current
-    el?.querySelector<HTMLElement>(FOCUSABLE)?.focus()
+    el?.querySelector<HTMLElement>('button[aria-label="Close menu"]')?.focus()
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') return onClose()
       if (e.key !== 'Tab' || !el) return
@@ -34,7 +35,7 @@ export default function MobileNavigation({ open, onClose }: { open: boolean; onC
     }
   }, [open, onClose])
 
-  return (
+  return createPortal(
     <div className={`fixed inset-0 z-50 overflow-hidden lg:hidden ${open ? '' : 'pointer-events-none invisible'}`} aria-hidden={!open} style={{ transition: 'visibility 0s linear ' + (open ? '0s' : '0.3s') }}>
       <div onClick={onClose} className={`absolute inset-0 bg-navy-900/60 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0'}`} />
       <div
@@ -83,6 +84,7 @@ export default function MobileNavigation({ open, onClose }: { open: boolean; onC
           <Button to="/contact#enquiry-form" onClick={onClose} className="w-full">Request a Quote</Button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
