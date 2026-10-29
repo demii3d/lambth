@@ -19,7 +19,7 @@ export default function ServicePage() {
 
   return (
     <>
-      <SEOHead title={service.title} description={`${service.summary} ${service.title} from LAMBTH PR, Lambeth Property Repairs, in Lambeth, South London.`} image={img.src} />
+      <SEOHead title={service.title} description={`${service.summary} ${service.title} from LAMBTH PR, Lambeth Property Repairs, in Lambeth, South London.`} />
       <PageHero
         eyebrow="Our Services"
         title={service.title}
