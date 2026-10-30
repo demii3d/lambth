@@ -25,6 +25,4 @@ export const site = {
   /** Enquiry endpoint (see README). When empty the form stays in its development state. */
   formEndpoint: (import.meta.env.VITE_FORM_ENDPOINT as string | undefined) || '',
 
-  /** Social share image (1200x630, relative to /public). */
-  ogImage: '/og-image.png',
 }
